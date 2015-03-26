@@ -1,13 +1,6 @@
 GIT
-  remote: git://github.com/gitlabeu/epp.git
-  revision: 505c3f2739eb1da918e54111aecfb138a822739d
-  specs:
-    epp (1.4.2)
-      hpricot
-      libxml-ruby
-
-PATH
-  remote: ../depp
+  remote: git://github.com/domify/depp.git
+  revision: 23cb80768673b8c6955907bc414cc302203af335
   specs:
     depp (0.0.1)
       coderay (>= 1.1.0)
@@ -22,6 +15,14 @@ PATH
       sass-rails (>= 5.0.0)
       uglifier (>= 2.6.1)
       uuidtools (>= 2.1.4)
+
+GIT
+  remote: git://github.com/gitlabeu/epp.git
+  revision: 505c3f2739eb1da918e54111aecfb138a822739d
+  specs:
+    epp (1.4.2)
+      hpricot
+      libxml-ruby
 
 GEM
   remote: https://rubygems.org/
