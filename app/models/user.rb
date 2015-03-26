@@ -1,9 +1,3 @@
 class User
-  def username
-    'priit'
-  end
-
-  def password
-    'test'
-  end
+  attr_accessor :username, :password
 end
