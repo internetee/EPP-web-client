@@ -1,0 +1,23 @@
+!!!
+%html{:lang => I18n.locale.to_s}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %meta{:content => "Full stack top-level domain (TLD) management.", :name => "description"}/
+    %meta{:content => "Gitlab LTD", :name => "author"}/
+    = csrf_meta_tags
+    = stylesheet_link_tag 'depp/application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'depp/application', 'data-turbolinks-track' => true
+    = favicon_link_tag 'favicon.ico'
+    %title Log In
+  %body.login{:style => env_style}
+    .container
+      .form-signin
+        - display = (flash.empty?) ? 'none' : 'block'
+        #flash{style: "display: #{display};"}
+          - type = (flash[:notice]) ? 'bg-success' : 'bg-danger'
+          .alert{class: type}= flash[:notice] || flash[:alert]
+        %h2.form-signin-heading.text-center EPP Client
+        %hr
+        = yield

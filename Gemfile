@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.1'
 
 gem 'depp', github: 'domify/depp'
+# gem 'depp', path: '../depp'
 
 # load env
 gem 'figaro', '~> 1.1.0'
