@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include CurrentUserHelper
   helper Depp::ApplicationHelper
 
   # Prevent CSRF attacks by raising an exception.
@@ -11,7 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authenticate_user
-    redirect_to login_url and return unless depp_current_user && session[:last_seen]
+    redirect_to main_app.login_url and return unless depp_current_user && session[:last_seen]
 
     if (session[:last_seen].to_i + ENV['session_timeout'].to_i) < Time.now.to_i
       session_timeout
@@ -23,13 +22,22 @@ class ApplicationController < ActionController::Base
   def session_timeout
     reset_session
     flash[:alert] = t('your_session_has_timed_out')
-    redirect_to login_url and return
+    redirect_to main_app.login_url and return
   end
 
   def depp_current_user
     @depp_current_user ||= Depp::User.new(
       tag: current_user.username,
       password: current_user.password
+    )
+  end
+
+  def current_user
+    return User.new if !session[:tag] || !session[:password]
+
+    @current_user ||= User.new(
+      username: session[:tag],
+      password: session[:password]
     )
   end
 end
