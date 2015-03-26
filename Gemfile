@@ -3,11 +3,13 @@ source 'https://rubygems.org'
 # core
 gem 'rails', '4.2.1'
 
+gem 'depp', github: 'gitlab.eu/depp'
+
 # load env
 gem 'figaro', '~> 1.1.0'
 
 # html-xml
-gem 'haml-rails', '~> 0.6.0' # haml for views
+gem 'haml-rails', '~> 0.9.0' # haml for views
 
 # style
 gem 'sass-rails', '~> 5.0.0'       # sass style

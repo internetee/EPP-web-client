@@ -1,6 +1,13 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+# Pick the frameworks you want:
+require 'active_model/railtie'
+# require "active_record/railtie"
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'sprockets/railtie'
+# require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -8,6 +15,12 @@ Bundler.require(*Rails.groups)
 
 module Webclient
   class Application < Rails::Application
+    # Add the fonts path
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+
+    # Precompile additional assets
+    config.assets.precompile += %w(*.svg *.eot *.woff *.ttf)
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -21,6 +34,6 @@ module Webclient
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    # config.active_record.raise_in_transactional_callbacks = true
   end
 end

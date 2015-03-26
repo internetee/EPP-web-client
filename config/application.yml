@@ -1,0 +1,19 @@
+# Be sure to restart your server when you modify settings.
+
+app_name: EPP Client
+show_ds_data_fields: 'false'
+default_nameservers_count: '2'
+default_admin_contacts_count: '1'
+session_timeout: '1800' # seconds
+
+epp_hostname: 'localhost'
+epp_port: '700'
+repp_url: 'http://localhost:8080/repp/v1/'
+
+cert_path: '/home/priit/apps/registry/ca/certs/webclient.crt.pem'
+key_path:  '/home/priit/apps/registry/ca/private/webclient.key.pem'
+
+# You can use `rake secret` to generate a secure secret key.
+# Your secret key is used for verifying the integrity of signed cookies.
+# If you change this key, all old signed cookies will become invalid!
+secret_key_base: please-change-it-you-can-generate-it-with-rake-secret
