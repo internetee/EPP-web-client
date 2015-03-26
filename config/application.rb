@@ -15,6 +15,9 @@ Bundler.require(*Rails.groups)
 
 module Webclient
   class Application < Rails::Application
+    # in order to overwrite some Depp styles
+    config.assets.paths << Rails.root.join('app', 'assets', 'depp')
+
     # Add the fonts path
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
 
