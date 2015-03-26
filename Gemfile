@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # core
 gem 'rails', '4.2.1'
 
-gem 'depp', github: 'gitlab.eu/depp'
+gem 'depp', github: 'domify/depp'
 
 # load env
 gem 'figaro', '~> 1.1.0'
