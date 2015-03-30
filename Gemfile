@@ -25,6 +25,8 @@ gem 'therubyracer',  platforms: :ruby
 
 gem 'epp', '~> 1.4.2', github: 'gitlabeu/epp'
 
+gem 'kaminari',        '~> 0.16.3'  # pagination
+
 # monitors
 gem 'newrelic_rpm', '~> 3.9.9.275'
 
