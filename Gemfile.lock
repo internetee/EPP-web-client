@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/domify/depp.git
-  revision: 93e1200be69b699483d722b7458fe675323fbb36
-  ref: 93e1200be69b699483d722b7458fe675323fbb36
+  revision: 800ab30dcb6dae33095bcb9df47b4e0a390891a3
+  ref: 800ab30dcb6dae33095bcb9df47b4e0a390891a3
   specs:
     depp (0.0.2)
       coderay (>= 1.1.0)
@@ -232,7 +232,7 @@ GEM
     ruby_parser (3.6.5)
       sexp_processor (~> 4.1)
     sass (3.4.13)
-    sass-rails (5.0.2)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
