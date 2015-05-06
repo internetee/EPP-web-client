@@ -11,8 +11,8 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 # alpha branch
-set :domain, 'webclient-st'
-set :deploy_to, '$HOME/webclient'
+set :domain, 'registry-st'
+set :deploy_to, '$HOME/demo-webclient'
 set :repository, 'https://github.com/domify/webclient.git' # dev repo
 set :branch, 'master'
 set :rails_env, 'alpha'
