@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # core
 gem 'rails', '4.2.1'
 
-gem 'depp', github: 'domify/depp', ref: '0c04c7434d40104b39e648b86e28f7f905903b61'
+gem 'depp', github: 'domify/depp', ref: '1d81ac877ded50559873b275ac67b5c317dadfba'
 # gem 'depp', path: '../depp'
 
 # load env
