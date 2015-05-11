@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   # rubocop: disable Metrics/CyclomaticComplexity
   def create
     @user = Depp::User.new(params[:user].merge(
-        pki: request.env['HTTP_SSL_CLIENT_S_DN_CN'].present?
+        pki: !Rails.env.development?
       )
     )
 
