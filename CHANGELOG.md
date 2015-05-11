@@ -2,6 +2,7 @@
 
 * Registrar: only dev can skip pki login certificate, 
   please be sure all application.yml and apache conf is correctly setup for pki
+* Updated Apache confing readme: updated location directive
 
 16.03.2015
 

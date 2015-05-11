@@ -96,7 +96,7 @@ For Apache, epp web client goes to port 443 in production, /etc/apache2/sites-en
 
       RequestHeader set SSL_CLIENT_S_DN_CN ""
 
-      <Location /sessions/pki>
+      <Location /sessions>
         SSLVerifyClient require
         RequestHeader set SSL_CLIENT_S_DN_CN "%{SSL_CLIENT_S_DN_CN}s"
       </Location> 
