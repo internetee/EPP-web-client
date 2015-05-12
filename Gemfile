@@ -13,15 +13,15 @@ gem 'figaro', '~> 1.1.0'
 gem 'haml-rails', '~> 0.9.0' # haml for views
 
 # style
-gem 'sass-rails', '~> 5.0.0'       # sass style
-gem 'bootstrap-sass', '~> 3.3.1.0' # bootstrap style
+gem 'sass-rails', '~> 5.0.3'       # sass style
+gem 'bootstrap-sass', '~> 3.3.4.1' # bootstrap style
 
 # js
-gem 'uglifier', '~> 2.6.1'         # minifies js
+gem 'uglifier',     '~> 2.7.1'     # minifies js
 gem 'coffee-rails', '~> 4.1.0'     # coffeescript support
 gem 'jquery-rails', '~> 4.0.3'     # jquery
-gem 'turbolinks'
-gem 'therubyracer',  platforms: :ruby
+gem 'turbolinks',   '~> 2.5.3'
+gem 'therubyracer', '~> 0.12.2', platforms: :ruby
 
 gem 'epp', '~> 1.4.2', github: 'gitlabeu/epp'
 
