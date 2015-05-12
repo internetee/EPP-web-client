@@ -1,3 +1,7 @@
+12.05.2015
+
+* Update ruby version to 2.2.2
+
 11.05.2015
 
 * Registrar: only dev can skip pki login certificate, 

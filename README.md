@@ -21,7 +21,7 @@ Manual demo install and database setup:
     cd /home/registry
     git clone https://github.com/internetee/EPP-web-client.git demo-webclient
     cd demo-webclient
-    rbenv local 2.2.1
+    rbenv local 2.2.2
     bundle
     cp current/config/application-example.yml shared/config/application.yml # and edit it
     cp config/secrets-example.yml config/secrets.yml # and generate your own key with 'rake secret'
@@ -32,7 +32,7 @@ Production install
     # at your local machine
     git clone https://github.com/internetee/EPP-web-client.git webclient
     cd webclient
-    rbenv local 2.2.1
+    rbenv local 2.2.2
     gem install mina
     mina pr setup # one time, only creates missing directories
     ssh webclient
