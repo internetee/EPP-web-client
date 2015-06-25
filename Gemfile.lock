@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/domify/depp.git
-  revision: bce617d821aa02f5fff1e6d7bda26d4be7f685c8
-  ref: bce617d821aa02f5fff1e6d7bda26d4be7f685c8
+  revision: e7530e08df2e12cb712d8daaa8a503d2b0d91a8d
+  ref: e7530e08df2e12cb712d8daaa8a503d2b0d91a8d
   specs:
     depp (0.0.2)
       coderay (>= 1.1.0)
       coffee-rails (>= 4.1.0)
       countries (>= 0.9.3)
-      epp-xml (>= 0.10.4)
+      epp-xml (>= 1.0.3)
       figaro (>= 1.1.0)
       haml-rails (>= 0.9.0)
       jquery-rails (>= 4.0.3)
@@ -99,7 +99,7 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    epp-xml (0.10.4)
+    epp-xml (1.0.3)
       activesupport (~> 4.1)
       builder (~> 3.2)
     erubis (2.7.0)
