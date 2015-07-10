@@ -21,8 +21,8 @@ set :rails_env, 'alpha'
 task :st do
   set :domain, 'webclient-st'
   set :deploy_to, '$HOME/webclient'
-  set :repository, 'https://github.com/internetee/EPP-web-client.git' # production repo
-  set :branch, 'master'
+  set :repository, 'https://github.com/internetee/EPP-web-client.git'
+  set :branch, 'staging'
   set :rails_env, 'staging'
 end
 
