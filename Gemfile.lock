@@ -1,7 +1,15 @@
 GIT
-  remote: git://github.com/domify/depp.git
-  revision: e7530e08df2e12cb712d8daaa8a503d2b0d91a8d
-  ref: e7530e08df2e12cb712d8daaa8a503d2b0d91a8d
+  remote: git://github.com/gitlabeu/epp.git
+  revision: 505c3f2739eb1da918e54111aecfb138a822739d
+  specs:
+    epp (1.4.2)
+      hpricot
+      libxml-ruby
+
+GIT
+  remote: git://github.com/internetee/depp.git
+  revision: 697118a67c76f7159b9ed8c5fdfc54b3eba89d63
+  ref: 697118a67c76f7159b9ed8c5fdfc54b3eba89d63
   specs:
     depp (0.0.2)
       coderay (>= 1.1.0)
@@ -17,14 +25,6 @@ GIT
       sass-rails (>= 5.0.0)
       uglifier (>= 2.6.1)
       uuidtools (>= 2.1.4)
-
-GIT
-  remote: git://github.com/gitlabeu/epp.git
-  revision: 505c3f2739eb1da918e54111aecfb138a822739d
-  specs:
-    epp (1.4.2)
-      hpricot
-      libxml-ruby
 
 GEM
   remote: https://rubygems.org/
@@ -91,7 +91,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1)
-    countries (0.11.4)
+    countries (0.11.5)
       currencies (~> 0.4.2)
       i18n_data (~> 0.7.0)
     currencies (0.4.2)
