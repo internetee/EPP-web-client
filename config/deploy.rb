@@ -43,8 +43,7 @@ set :shared_paths, [
   'config/secrets.yml',
   'config/application.yml',
   'log',
-  'public/system',
-  'public/assets'
+  'public/system'
 ]
 
 # Optional settings:
@@ -76,8 +75,6 @@ task setup: :environment do
 
   queue! %(mkdir -p "#{deploy_to}/shared/public/system")
   queue! %(chmod g+rx,u+rwx "#{deploy_to}/shared/public/system")
-
-  queue! %(mkdir -p "#{deploy_to}/shared/public/assets")
   deploy do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
