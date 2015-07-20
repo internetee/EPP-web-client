@@ -8,8 +8,8 @@ GIT
 
 GIT
   remote: git://github.com/internetee/depp.git
-  revision: d73769fe66fa61b94a33303537c8d7b56529fd45
-  ref: d73769fe66fa61b94a33303537c8d7b56529fd45
+  revision: 3ed9caacc52ffd118b04f96caeeaee801f358de0
+  ref: 3ed9caacc52ffd118b04f96caeeaee801f358de0
   specs:
     depp (0.0.2)
       coderay (>= 1.1.0)
