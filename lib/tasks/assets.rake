@@ -16,3 +16,7 @@ namespace :assets do
     FileUtils.cp("public/assets/application.js", "public/assets/depp/application.js")
   end
 end
+
+task as: :environment do
+  system('RAILS_ENV=production rake assets:precompile')
+end
