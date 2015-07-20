@@ -33,7 +33,8 @@ Production install
     git clone https://github.com/internetee/EPP-web-client.git webclient
     cd webclient
     rbenv local 2.2.2
-    gem install mina
+    gem install mina # or any other deploy tool
+    cp config/deploy-example.rb config/deploy.rb # and edit it
     mina pr setup # one time, only creates missing directories
     ssh webclient
     # at your server
@@ -43,7 +44,7 @@ Production install
     cp current/config/application-example.yml shared/config/application.yml # and edit it
     exit
     # at your local machine
-    mina pr deploy # this is command you use in every application code update
+    mina pr deploy # when using mina deploy
 
 For Apache, epp web client goes to port 443 in production, /etc/apache2/sites-enabled/webclient.conf short example:
 

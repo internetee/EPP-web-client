@@ -1,3 +1,7 @@
+20.07.2015
+
+* Example mina/deploy.rb renamed to mina/deploy-example.rb in order to not overwrite local deploy scripts
+
 12.05.2015
 
 * Update ruby version to 2.2.2
