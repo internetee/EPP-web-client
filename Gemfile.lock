@@ -8,14 +8,14 @@ GIT
 
 GIT
   remote: git://github.com/internetee/depp.git
-  revision: 3ed9caacc52ffd118b04f96caeeaee801f358de0
-  ref: 3ed9caacc52ffd118b04f96caeeaee801f358de0
+  revision: e9ce77f5e785a08123928d1186168dc0e4564519
+  ref: e9ce77f5e785a08123928d1186168dc0e4564519
   specs:
     depp (0.0.2)
       coderay (>= 1.1.0)
       coffee-rails (>= 4.1.0)
       countries (>= 0.9.3)
-      epp-xml (>= 1.0.3)
+      epp-xml (>= 1.0.4)
       figaro (>= 1.1.0)
       haml-rails (>= 0.9.0)
       jquery-rails (>= 4.0.3)
@@ -99,7 +99,7 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    epp-xml (1.0.3)
+    epp-xml (1.0.4)
       activesupport (~> 4.1)
       builder (~> 3.2)
     erubis (2.7.0)
