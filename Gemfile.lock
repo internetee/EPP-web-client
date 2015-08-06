@@ -6,10 +6,8 @@ GIT
       hpricot
       libxml-ruby
 
-GIT
-  remote: git://github.com/internetee/depp.git
-  revision: e9ce77f5e785a08123928d1186168dc0e4564519
-  ref: e9ce77f5e785a08123928d1186168dc0e4564519
+PATH
+  remote: ../depp
   specs:
     depp (0.0.2)
       coderay (>= 1.1.0)

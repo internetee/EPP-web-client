@@ -1,0 +1,29 @@
+- if @contact.persisted?
+  = render 'depp/shared/title', name: "#{t(:delete)}: #{@contact.name}"
+
+  = form_for(@contact, class: 'form-horizontal', multipart: true, method: :delete) do |f|
+    = render 'depp/shared/error_messages', f: f 
+    = f.hidden_field :id
+    .row
+      .col-md-12
+        = render 'depp/contacts/form_partials/legal_document', f: f
+
+    %hr
+    - if @contact.complete_info?
+      = f.hidden_field :password
+    - else
+      .row
+        .form-group
+          .col-md-6
+            &nbsp;
+          .col-md-2.text-right
+            = f.label :password, t(:password)
+          .col-md-4
+            = f.text_field :password, class: 'form-control', autocomplete: 'off'
+    
+    %br
+    .row
+      .col-md-12.text-right
+        = button_tag t(:delete), class: 'btn btn-danger'
+- else
+  %h2= "#{t(:delete)}: #{t(:not_found)}"

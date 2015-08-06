@@ -1,0 +1,41 @@
+- if @contact.id.present? 
+  - if request.get? && @contact.complete_info?
+    - content_for :actions do
+      = link_to(t(:edit), edit_contact_path(@contact.id), class: 'btn btn-primary')
+      = link_to(t(:delete), delete_contact_path(@contact.id), class: 'btn btn-default')
+  - if !@contact.complete_info?
+    - content_for :actions do
+      - path = fullshow_contact_path(@contact.code)
+      - path = fulledit_contact_path(@contact.code) if params[:com] == 'update'
+
+      = form_tag path, class: 'form-horizontal' do
+        = hidden_field_tag :id, @contact.code
+        .form-group
+          .col-md-4.control-label
+            = label_tag :password, t(:password)
+          .col-md-5
+            = text_field_tag :password, params[:password], class: 'form-control', autocomplete: 'off'
+          .col-md-3
+            - case params[:com]
+            - when 'update'
+              = button_tag(t(:edit), class: 'btn btn-primary')
+            - else
+              = button_tag(t(:full_info), class: 'btn btn-primary')
+
+
+  = render 'depp/shared/title', name: truncate(@contact.name)
+
+  .row
+    .col-md-6= render 'depp/contacts/partials/general'
+    .col-md-6= render 'depp/contacts/partials/address'
+  .row
+    .col-md-12= render 'depp/contacts/partials/statuses', statuses: @contact.statuses
+
+
+- else 
+  .row
+    .col-sm-6
+      - if request.post?
+        %h1= t(:wrong_contact_password)
+      - else
+        %h1= t(:not_found)
