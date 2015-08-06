@@ -5,13 +5,15 @@ module Depp
 
     attr_accessor :name, :current_user, :epp_xml
 
-    DOMAIN_STATUSES = %w(
+    STATUSES = %w(
       clientDeleteProhibited
       clientHold
       clientRenewProhibited
       clientTransferProhibited
       clientUpdateProhibited
     )
+
+    PERIODS = [['1 year', '1y'], ['2 years', '2y'], ['3 years', '3y']]
 
     def initialize(args = {})
       self.current_user = args[:current_user]
@@ -33,15 +35,17 @@ module Depp
     end
 
     def create(domain_params)
+      dns_hash = {}
+      keys = Domain.create_dnskeys_hash(domain_params)
+      dns_hash[:_anonymus] = keys if keys.any?
+
       xml = epp_xml.create({
         name: { value: domain_params[:name] },
-        registrant: { value: domain_params[:registrant] },
-        period: { value: domain_params[:period], attrs: { unit: domain_params[:period_unit] } },
+        period: { value: domain_params[:period].to_s[0], attrs: { unit: domain_params[:period].to_s[1] } },
         ns: Domain.create_nameservers_hash(domain_params),
+        registrant: { value: domain_params[:registrant] },
         _anonymus: Domain.create_contacts_hash(domain_params)
-      }, {
-        _anonymus: Domain.create_dnskeys_hash(domain_params)
-      }, Domain.construct_custom_params_hash(domain_params))
+      }, dns_hash, Domain.construct_custom_params_hash(domain_params))
 
       current_user.request(xml)
     end
@@ -71,12 +75,13 @@ module Depp
       current_user.request(epp_xml.renew(
         name: { value: params[:domain_name] },
         curExpDate: { value: params[:cur_exp_date] },
-        period: { value: params[:period], attrs: { unit: params[:period_unit] } }
+        period: { value: params[:period].to_s[0], attrs: { unit: params[:period].to_s[1] } }
       ))
     end
 
     def transfer(params)
-      op = params[:query] ? 'query' : nil
+      op = params[:request] ? 'request' : nil
+      op = params[:query] ? 'query' : op
       op = params[:approve] ? 'approve' : op
       op = params[:reject] ? 'reject' : op
 
@@ -127,7 +132,9 @@ module Depp
         ret.with_indifferent_access
       end
 
-      def construct_params_from_server_data(data) # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
+      def construct_params_from_server_data(data)
         ret = default_params
         ret[:name] = data.css('name').text
         ret[:registrant] = data.css('registrant').text
@@ -164,7 +171,7 @@ module Depp
         end
 
         data.css('status').each_with_index do |x, i|
-          next unless DOMAIN_STATUSES.include?(x['s'])
+          next unless STATUSES.include?(x['s'])
           ret[:statuses_attributes][i] = {
             code: x['s'],
             description: x.text
@@ -173,53 +180,68 @@ module Depp
 
         ret
       end
+      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
 
       def construct_custom_params_hash(domain_params)
-        custom_params = {}
+        custom_params = { _anonymus: [] }
         if domain_params[:legal_document].present?
           type = domain_params[:legal_document].original_filename.split('.').last.downcase
-          custom_params = {
-            _anonymus: [
-              legalDocument: { value: Base64.encode64(domain_params[:legal_document].read), attrs: { type:  type } }
-            ]
+          custom_params[:_anonymus] << {
+            legalDocument: { value: Base64.encode64(domain_params[:legal_document].read), attrs: { type:  type } }
           }
+        end
+
+        if domain_params[:reserved_pw].present?
+          custom_params[:_anonymus] << { reserved: { pw: { value: domain_params[:reserved_pw] } } }
         end
 
         custom_params
       end
 
+      # rubocop: disable Metrics/PerceivedComplexity
+      # rubocop: disable Metrics/CyclomaticComplexity
       def construct_edit_hash(domain_params, old_domain_params)
-        contacts = create_contacts_hash(domain_params) - create_contacts_hash(old_domain_params)
-        statuses = create_statuses_hash(domain_params) - create_statuses_hash(old_domain_params)
-        add_anon = contacts + statuses
+        contacts = array_difference(create_contacts_hash(domain_params), create_contacts_hash(old_domain_params))
+        add_anon = contacts
 
-        contacts = create_contacts_hash(old_domain_params) - create_contacts_hash(domain_params)
-        statuses = create_statuses_hash(old_domain_params) - create_statuses_hash(domain_params)
-        rem_anon = contacts + statuses
+        contacts = array_difference(create_contacts_hash(old_domain_params), create_contacts_hash(domain_params))
+        rem_anon = contacts
+
+        add_arr = []
+        add_ns = create_nameservers_hash(domain_params) - create_nameservers_hash(old_domain_params)
+        add_arr << { ns: add_ns } if add_ns.any?
+        add_arr << { _anonymus: add_anon } if add_anon.any?
+
+        rem_arr = []
+        rem_ns = create_nameservers_hash(old_domain_params) - create_nameservers_hash(domain_params)
+        rem_arr << { ns: rem_ns } if rem_ns.any?
+        rem_arr << { _anonymus: rem_anon } if rem_anon.any?
 
         if domain_params[:registrant] != old_domain_params[:registrant]
           chg = [{ registrant: { value: domain_params[:registrant] } }]
         end
 
+        add_arr = nil if add_arr.none?
+        rem_arr = nil if rem_arr.none?
+
         {
           name: { value: domain_params[:name] },
           chg: chg,
-          add: [
-            { ns: create_nameservers_hash(domain_params) - create_nameservers_hash(old_domain_params) },
-            { _anonymus: add_anon }
-          ],
-          rem: [
-            { ns: create_nameservers_hash(old_domain_params) - create_nameservers_hash(domain_params) },
-            { _anonymus: rem_anon }
-          ]
+          add: add_arr,
+          rem: rem_arr
         }
       end
+      # rubocop: enable Metrics/PerceivedComplexity
+      # rubocop: enable Metrics/CyclomaticComplexity
 
       def construct_ext_edit_hash(domain_params, old_domain_params)
-        {
-          add: create_dnskeys_hash(domain_params) - create_dnskeys_hash(old_domain_params),
-          rem: create_dnskeys_hash(old_domain_params) - create_dnskeys_hash(domain_params)
-        }
+        rem_keys = create_dnskeys_hash(old_domain_params) - create_dnskeys_hash(domain_params)
+        add_keys = create_dnskeys_hash(domain_params) - create_dnskeys_hash(old_domain_params)
+        hash = {}
+        hash[:rem] = rem_keys if rem_keys.any?
+        hash[:add] = add_keys if add_keys.any?
+        hash
       end
 
       def create_nameservers_hash(domain_params)
@@ -232,7 +254,7 @@ module Depp
           host_attr << { hostAddr: { value: v['ipv4'], attrs: { ip: 'v4' } } } if v['ipv4'].present?
           host_attr << { hostAddr: { value: v['ipv6'], attrs: { ip: 'v6' } } } if v['ipv6'].present?
 
-          ret <<  { hostAttr: host_attr }
+          ret << { hostAttr: host_attr }
         end
 
         ret
@@ -255,11 +277,11 @@ module Depp
         domain_params[:dnskeys_attributes].each do |_k, v|
           if v['ds_key_tag'].blank?
             kd = create_key_data_hash(v)
-            ret <<  {
+            ret << {
               keyData: kd
             } if kd
           else
-            ret <<  {
+            ret << {
               dsData: [
                 keyTag: { value: v['ds_key_tag'] },
                 alg: { value: v['ds_alg'] },
@@ -284,15 +306,12 @@ module Depp
         }
       end
 
-      def create_statuses_hash(domain_params)
-        ret = []
-        domain_params[:statuses_attributes].each do |_k, v|
-          next if v['code'].blank?
-          ret << {
-            status: { value: v['description'], attrs: { s: v['code'] } }
-          }
+      def array_difference(x, y)
+        ret = x.dup
+        y.each do |element|
+          index = ret.index(element)
+          ret.delete_at(index) if index
         end
-
         ret
       end
     end

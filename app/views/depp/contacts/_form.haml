@@ -1,5 +1,6 @@
-= form_for(@contact, html: {class: 'form-horizontal js-contact-form'}) do |f|
-  = render 'depp/shared/error_messages', f: f 
+- url = @contact.persisted? ? contact_path(@contact) : contacts_path
+= form_for(@contact, url: url, html: {class: 'form-horizontal js-contact-form'}) do |f|
+  = render 'depp/shared/error_messages', f: f
   = f.hidden_field :id
   = f.hidden_field :password
   .row
@@ -8,7 +9,7 @@
   .row
     .col-md-12
       = render 'depp/contacts/form_partials/address', f: f
-  - if !@contact.persisted? 
+  - if !@contact.persisted?
     .row
       .col-md-12
         = render 'depp/contacts/form_partials/code', f: f

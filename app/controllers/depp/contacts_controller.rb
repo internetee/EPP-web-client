@@ -45,7 +45,7 @@ module Depp
     end
 
     def create
-      @contact = Depp::Contact.new(params[:contact])
+      @contact = Depp::Contact.new(params[:depp_contact])
 
       if @contact.save
         redirect_to contact_url(@contact.id)

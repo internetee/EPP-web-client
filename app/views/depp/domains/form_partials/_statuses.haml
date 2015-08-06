@@ -11,7 +11,7 @@
         .form-group
           = label_tag "domain_statuses_attributes_#{k}_code", t('code'),class: 'col-md-2 control-label'
           .col-md-10
-            = select_tag "domain[statuses_attributes][#{k}][code]", options_for_select(Depp::Domain::DOMAIN_STATUSES, v['code']), {class: 'form-control', prompt: ''}
+            = select_tag "domain[statuses_attributes][#{k}][code]", options_for_select(Depp::Domain::STATUSES, v['code']), {class: 'form-control', prompt: ''}
         .form-group
           = label_tag "domain_statuses_attributes_#{k}_description", t('description'),class: 'col-md-2 control-label'
           .col-md-10

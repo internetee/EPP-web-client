@@ -11,9 +11,9 @@ namespace :assets do
       FileUtils.cp("public/assets/#{digested_path}", "public/assets/#{logical_path}")
     end
 
-    # otherwise depp application.js has issues and 
+    # otherwise depp application.js has issues and
     # we cannot overwrite depp application layout at the moment
-    FileUtils.cp("public/assets/application.js", "public/assets/depp/application.js")
+    # FileUtils.cp("public/assets/application.js", "public/assets/depp/application.js")
   end
 end
 

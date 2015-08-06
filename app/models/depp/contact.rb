@@ -3,7 +3,7 @@ module Depp
     include ActiveModel::Model
 
     attr_accessor :id, :name, :email, :phone, :org_name,
-      :ident, :ident_type, :ident_country_code, 
+      :ident, :ident_type, :ident_country_code,
       :street, :city, :zip, :state, :country_code,
       :password, :legal_document, :statuses, :code
 
@@ -11,12 +11,14 @@ module Depp
     DISCLOSURE_TYPES = [DISABLED, '1', '0']
     TYPES = %w( bic priv birthday )
     SELECTION_TYPES = [
-      [ 'Business code', 'bic' ],
-      [ 'Personal identification code', 'priv' ],
-      [ 'Birthday', 'birthday' ]
+      ['Business code', 'bic'],
+      ['Personal identification code', 'priv'],
+      ['Birthday', 'birthday']
     ]
 
     class << self
+      attr_reader :epp_xml, :user
+
       def new_from_params(params)
         new(
           id: params[:code],
@@ -36,12 +38,13 @@ module Depp
           city:         params[:city],
           zip:          params[:zip],
           state:        params[:state],
-          country_code: params[:country_code],
+          country_code: params[:country_code]
         )
       end
 
-      def find_by_id(id, password = nil)
-        data = info_xml(id, password)
+      # rubocop:disable Metrics/AbcSize
+      def find_by_id(id)
+        data = info_xml(id)
 
         res = data.css('epp response resData infData')
         ext = data.css('epp response extension')
@@ -64,7 +67,7 @@ module Depp
           zip:          res.css('postalInfo addr pc').text,
           state:        res.css('postalInfo addr sp').text,
           country_code: res.css('postalInfo addr cc').text,
-          
+
           # authInfo
           password: res.css('authInfo pw').text,
 
@@ -72,18 +75,11 @@ module Depp
           statuses: data.css('status').map { |s| [s['s'], s.text] }
         )
       end
+      # rubocop:enable Metrics/AbcSize
 
       def user=(user)
         @user = user
         @epp_xml = EppXml::Contact.new(cl_trid_prefix: user.tag)
-      end
-
-      def epp_xml
-        @epp_xml
-      end
-
-      def user
-        @user
       end
 
       def info_xml(id, password = nil)
@@ -140,44 +136,41 @@ module Depp
         hash
       end
 
-      def check(id)
-        xml = Depp::Contact.epp_xml.check(id: { value: id })
-        Depp::Contact.user.request(xml)
+      def type_string(type_code)
+        return '' if type_code.blank?
+        t = SELECTION_TYPES.select { |tp| tp.second == type_code }
+        t.try(:first).try(:first)
       end
     end
 
-    def initialize(attributes={})
-      super
-      self.country_code = 'EE'       if country_code.blank?
-      self.ident_type = 'bic'        if ident_type.blank?
-      self.ident_country_code = 'EE' if ident_country_code.blank?
-    end
-
     def save
-      create_xml = Depp::Contact.epp_xml.create(
-        {
-          id: { value: code },
-          email: { value: email },
-          voice: { value: phone },
-          postalInfo: {
-            name: { value: name },
-            org:  { value: org_name },
-            addr: {
-              street: { value: street },
-              city:   { value: city },
-              pc:     { value: zip },
-              sp:     { value: state },
-              cc:     { value: country_code }
-            }
+      hash = {
+        id: { value: code },
+        postalInfo: {
+          name: { value: name },
+          org:  { value: org_name },
+          addr: {
+            street: { value: street },
+            city:   { value: city },
+            sp:     { value: state },
+            pc:     { value: zip },
+            cc:     { value: country_code }
           }
-        }, 
-        extension_xml
-      )
+        },
+        voice: { value: phone },
+        email: { value: email }
+      }
+
+      hash[:id] = nil if code.blank?
+      create_xml = Depp::Contact.epp_xml.create(hash, extension_xml)
+
       data = Depp::Contact.user.request(create_xml)
       self.id = data.css('id').text
       handle_errors(data)
     end
 
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def update_attributes(params)
       self.ident_country_code = params[:ident_country_code]
       self.ident_type   = params[:ident_type]
@@ -198,22 +191,22 @@ module Depp
         {
           id: { value: id },
           chg: {
-            voice: { value: phone },
-            email: { value: email },
             postalInfo: {
               name: { value: name },
               org:  { value: org_name },
               addr: {
                 street: { value: street },
                 city:   { value: city },
-                pc:     { value: zip },
                 sp:     { value: state },
+                pc:     { value: zip },
                 cc:     { value: country_code }
               }
+            },
+            voice: { value: phone },
+            email: { value: email },
+            authInfo: {
+              pw: { value: password }
             }
-          },
-          authInfo: {
-            pw: { value: password }
           }
         },
         extension_xml
@@ -221,6 +214,8 @@ module Depp
       data = Depp::Contact.user.request(update_xml)
       handle_errors(data)
     end
+    # rubocop:enbale Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def delete
       delete_xml = Contact.epp_xml.delete(
@@ -235,7 +230,12 @@ module Depp
     end
 
     def extension_xml
-      ident_xml.merge(legal_document_xml)
+      xml = { _anonymus: [] }
+      ident = ident_xml[:_anonymus].try(:first) unless persisted?
+      legal = legal_document_xml[:_anonymus].try(:first)
+      xml[:_anonymus] << ident if ident.present?
+      xml[:_anonymus] << legal if legal.present?
+      xml
     end
 
     def ident_xml
@@ -250,14 +250,13 @@ module Depp
       return {} if legal_document.blank?
 
       type = legal_document.original_filename.split('.').last.downcase
-      { 
+      {
         _anonymus: [
           legalDocument: { value: Base64.encode64(legal_document.read), attrs: { type: type } }
         ]
       }
     end
 
-    # depricated, use class method
     def check(id)
       xml = epp_xml.check(id: { value: id })
       current_user.request(xml)
@@ -275,7 +274,7 @@ module Depp
       ident_type == 'priv'
     end
 
-    def persisted? 
+    def persisted?
       id.present?
     end
 
@@ -286,17 +285,14 @@ module Depp
     def handle_errors(data)
       data.css('result').each do |x|
         success_codes = %(1000, 1300, 1301)
-        
-        unless success_codes.include?(x['code'])
-          message = "#{x.css('msg').text} #{x.css('value').text}"
+        next if success_codes.include?(x['code'])
 
-          attr = message.split('[').last.strip.sub(']','') if message.include?('[')
-
-          attr = :base if attr.nil?
-          attr = 'phone' if attr == 'voice'
-
-          errors.add(attr, message) 
-        end
+        message = "#{x.css('msg').text} #{x.css('value').text}"
+        attr = message.split('[').last.strip.sub(']', '') if message.include?('[')
+        attr = :base if attr.nil?
+        attr = 'phone' if attr == 'voice'
+        attr = 'zip' if attr == 'pc'
+        errors.add(attr, message)
       end
       errors.blank?
     end
