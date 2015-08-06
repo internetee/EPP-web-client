@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.1'
 
 # gem 'depp', github: 'internetee/depp', ref: 'e9ce77f5e785a08123928d1186168dc0e4564519'
-gem 'depp', path: '../depp'
+# gem 'depp', path: '../depp'
 
 # load env
 gem 'figaro', '~> 1.1.0'
@@ -24,6 +24,14 @@ gem 'turbolinks',   '~> 2.5.3'
 gem 'therubyracer', '~> 0.12.2', platforms: :ruby
 
 gem 'epp', '~> 1.4.2', github: 'gitlabeu/epp'
+gem 'epp-xml', '~> 1.0.4' # EIS EPP XMLs
+gem 'uuidtools', '~> 2.1.4' # For unique IDs (used by the epp gem)
+
+gem 'nokogiri', '~> 1.6.6.2' # For XML parsing
+
+gem 'countries', '~> 0.11.4'
+
+gem 'coderay', '~> 1.1.0'   # xml console visualize
 
 gem 'kaminari',        '~> 0.16.3'  # pagination
 

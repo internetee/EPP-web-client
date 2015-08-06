@@ -6,24 +6,6 @@ GIT
       hpricot
       libxml-ruby
 
-PATH
-  remote: ../depp
-  specs:
-    depp (0.0.2)
-      coderay (>= 1.1.0)
-      coffee-rails (>= 4.1.0)
-      countries (>= 0.9.3)
-      epp-xml (>= 1.0.4)
-      figaro (>= 1.1.0)
-      haml-rails (>= 0.9.0)
-      jquery-rails (>= 4.0.3)
-      kaminari (~> 0.16.3)
-      nokogiri (>= 1.6.6.2)
-      rails (>= 4.2.1)
-      sass-rails (>= 5.0.0)
-      uglifier (>= 2.6.1)
-      uuidtools (>= 2.1.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -284,9 +266,11 @@ DEPENDENCIES
   better_errors (~> 2.0.0)
   binding_of_caller (~> 0.7.2)
   bootstrap-sass (~> 3.3.4.1)
+  coderay (~> 1.1.0)
   coffee-rails (~> 4.1.0)
-  depp!
+  countries (~> 0.11.4)
   epp (~> 1.4.2)!
+  epp-xml (~> 1.0.4)
   figaro (~> 1.1.0)
   guard-livereload (= 2.4.0)
   guard-rubocop (~> 1.1.0)
@@ -295,6 +279,7 @@ DEPENDENCIES
   kaminari (~> 0.16.3)
   mina (~> 0.3.1)
   newrelic_rpm (~> 3.9.9.275)
+  nokogiri (~> 1.6.6.2)
   pry (~> 0.10.1)
   rack-livereload (= 0.3.15)
   rails (= 4.2.1)
@@ -306,3 +291,4 @@ DEPENDENCIES
   turbolinks (~> 2.5.3)
   uglifier (~> 2.7.1)
   unicorn
+  uuidtools (~> 2.1.4)
