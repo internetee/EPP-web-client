@@ -6,9 +6,6 @@
       %ul.nav.nav-tabs{:role => "tablist", id: 'tabs'}
         %li.active
           %a{"data-toggle" => "tab", :href => "#general-tab", :role => "tab"}= t('general')
-        - if params['domain_name']
-          %li
-            %a{"data-toggle" => "tab", :href => "#statuses-tab", :role => "tab"}= t('statuses')
       / Tab panes
       .tab-content
         #general-tab.tab-pane.active
@@ -18,9 +15,6 @@
           = render 'depp/domains/form_partials/nameservers'
           %hr
           = render 'depp/domains/form_partials/dnskeys'
-        - if params['domain_name']
-          #statuses-tab.tab-pane
-            = render 'depp/domains/form_partials/statuses'
 
         .panel.panel-default
           .panel-heading.clearfix
