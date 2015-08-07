@@ -5,18 +5,18 @@ class SessionsController < ApplicationController
   # rubocop: disable Metrics/PerceivedComplexity
   # rubocop: disable Metrics/CyclomaticComplexity
   def create
-    @user = Depp::User.new(params[:user].merge(
+    @user = Depp::User.new(params[:depp_user].merge(
         pki: !Rails.env.development?
       )
     )
 
-    if @user.pki && request.env['HTTP_SSL_CLIENT_S_DN_CN'] != params[:user][:tag]
+    if @user.pki && request.env['HTTP_SSL_CLIENT_S_DN_CN'] != params[:depp_user][:tag]
       @user.errors.add(:base, :invalid_cert)
     end
 
     if @user.errors.none? && @user.valid?
-      session[:tag] = params[:user][:tag]
-      session[:password] = params[:user][:password]
+      session[:tag] = params[:depp_user][:tag]
+      session[:password] = params[:depp_user][:password]
       session[:last_seen] = Time.now.to_i
       session[:pki] = @user.pki
 

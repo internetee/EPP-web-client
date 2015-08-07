@@ -37,11 +37,11 @@ module Depp
     def create(domain_params)
       dns_hash = {}
       keys = Domain.create_dnskeys_hash(domain_params)
-      dns_hash[:_anonymus] = keys if keys.any?
 
+      dns_hash[:_anonymus] = keys if keys.any?
       xml = epp_xml.create({
         name: { value: domain_params[:name] },
-        period: { value: domain_params[:period].to_s[0], attrs: { unit: domain_params[:period].to_s[1] } },
+        period: { value: domain_params[:period], attrs: { unit: domain_params[:period_unit] } },
         ns: Domain.create_nameservers_hash(domain_params),
         registrant: { value: domain_params[:registrant] },
         _anonymus: Domain.create_contacts_hash(domain_params)
@@ -75,7 +75,7 @@ module Depp
       current_user.request(epp_xml.renew(
         name: { value: params[:domain_name] },
         curExpDate: { value: params[:cur_exp_date] },
-        period: { value: params[:period].to_s[0], attrs: { unit: params[:period].to_s[1] } }
+        period: { value: params[:period], attrs: { unit: params[:period_unit] } }
       ))
     end
 

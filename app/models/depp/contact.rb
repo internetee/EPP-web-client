@@ -43,8 +43,8 @@ module Depp
       end
 
       # rubocop:disable Metrics/AbcSize
-      def find_by_id(id)
-        data = info_xml(id)
+      def find_by_id(id, password = nil)
+        data = info_xml(id, password)
 
         res = data.css('epp response resData infData')
         ext = data.css('epp response extension')
@@ -141,6 +141,11 @@ module Depp
         t = SELECTION_TYPES.select { |tp| tp.second == type_code }
         t.try(:first).try(:first)
       end
+
+      def check(id)
+        xml = Depp::Contact.epp_xml.check(id: { value: id })
+        Depp::Contact.user.request(xml)
+      end
     end
 
     def save
@@ -212,6 +217,7 @@ module Depp
         extension_xml
       )
       data = Depp::Contact.user.request(update_xml)
+
       handle_errors(data)
     end
     # rubocop:enbale Metrics/AbcSize

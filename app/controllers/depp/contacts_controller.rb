@@ -55,9 +55,9 @@ module Depp
     end
 
     def update
-      @contact = Depp::Contact.new(params[:contact])
+      @contact = Depp::Contact.new(params[:depp_contact])
 
-      if @contact.update_attributes(params[:contact])
+      if @contact.update_attributes(params[:depp_contact])
         redirect_to contact_url(@contact.id)
       else
         render 'edit'
@@ -69,7 +69,7 @@ module Depp
     end
 
     def destroy
-      @contact = Depp::Contact.new(params[:contact])
+      @contact = Depp::Contact.new(params[:depp_contact])
 
       if @contact.delete
         redirect_to contacts_url, notice: t(:destroyed)
