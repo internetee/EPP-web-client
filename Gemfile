@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # core
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 
 # gem 'depp', github: 'internetee/depp', ref: 'e9ce77f5e785a08123928d1186168dc0e4564519'
 # gem 'depp', path: '../depp'
