@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/gitlabeu/epp.git
+  remote: git://github.com/internetee/epp.git
   revision: 505c3f2739eb1da918e54111aecfb138a822739d
   specs:
     epp (1.4.2)
@@ -288,3 +288,6 @@ DEPENDENCIES
   uglifier (~> 2.7.1)
   unicorn
   uuidtools (~> 2.1.4)
+
+BUNDLED WITH
+   1.10.6

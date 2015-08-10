@@ -23,7 +23,7 @@ gem 'jquery-rails', '~> 4.0.3'     # jquery
 gem 'turbolinks',   '~> 2.5.3'
 gem 'therubyracer', '~> 0.12.2', platforms: :ruby
 
-gem 'epp', '~> 1.4.2', github: 'gitlabeu/epp'
+gem 'epp', '~> 1.4.2', github: 'internetee/epp'
 gem 'epp-xml', '~> 1.0.4' # EIS EPP XMLs
 gem 'uuidtools', '~> 2.1.4' # For unique IDs (used by the epp gem)
 
