@@ -7,8 +7,10 @@ module Depp
 
       res = depp_current_user.repp_request('domains', { details: true, limit: limit, offset: offset })
       flash.now[:epp_results] = [{ 'code' => res.code, 'msg' => res.message }]
-      @response = res.parsed_body.with_indifferent_access if res.code == '200'
-      @contacts    = @response ? @response[:contacts] : []
+      return redirect_to login_path, alert: "#{res.message} [#{res.code}]" if res.code != 200
+
+      @response = res.parsed_body.with_indifferent_access 
+      @contacts = @response ? @response[:contacts] : []
 
       @paginatable_array = Kaminari.paginate_array(
         [], total_count: @response[:total_number_of_records]
