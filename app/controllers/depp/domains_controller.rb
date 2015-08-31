@@ -7,7 +7,7 @@ module Depp
 
       res = depp_current_user.repp_request('domains', { details: true, limit: limit, offset: offset })
       flash.now[:epp_results] = [{ 'code' => res.code, 'msg' => res.message }]
-      return redirect_to login_path, alert: "#{res.message} [#{res.code}]" if res.code != 200
+      return redirect_to login_path, alert: "#{res.message} [#{res.code}]" if res.code != '200'
 
       @response = res.parsed_body.with_indifferent_access 
       @contacts = @response ? @response[:contacts] : []
