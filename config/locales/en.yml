@@ -57,7 +57,7 @@ en:
   result: 'Result'
   available: 'Available'
   reason: 'Reason'
-  contact_code: 'Code'
+  id: 'ID'
   add_another: 'Add another'
   delete: 'Delete'
   contact_type: 'Contact type'
