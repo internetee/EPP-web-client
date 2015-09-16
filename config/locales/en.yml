@@ -35,7 +35,7 @@ en:
   tech_contacts: 'Tech contacts'
   name: 'Name'
   type: 'Type'
-  code: 'Code'
+  code: 'ID'
   nameservers: 'Nameservers'
   hostname: 'Hostname'
   ipv4: 'IPv4'
