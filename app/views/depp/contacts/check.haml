@@ -5,7 +5,7 @@
     = form_tag check_contacts_path, class: 'form-horizontal', method: :get do
       .form-group
         .col-md-3.control-label
-          = label_tag :contact_id, t(:contact_code)
+          = label_tag :contact_id, t(:id)
         .col-md-5
           = text_field_tag :contacts, params[:contacts], class: 'form-control'
         .col-md-2
@@ -22,7 +22,7 @@
         %table.table.table-hover.table-bordered.table-condensed
           %thead
             %tr
-              %th= t(:contact_code)
+              %th= t(:id)
               %th= t(:result)
           %tbody
             - @contacts.each do |contact|

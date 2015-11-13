@@ -18,10 +18,10 @@
           </contact:postalInfo>
           <contact:voice>+123.7035555555</contact:voice>
           <contact:email>jdoe@example.com</contact:email>
+          <contact:authInfo>
+            <contact:pw>2fooBAR</contact:pw>
+          </contact:authInfo>
         </contact:chg>
-        <contact:authInfo>
-          <contact:pw>2fooBAR</contact:pw>
-        </contact:authInfo>
       </contact:update>
     </update>
     <extension>

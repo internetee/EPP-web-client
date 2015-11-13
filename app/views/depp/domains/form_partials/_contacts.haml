@@ -13,9 +13,9 @@
             = select_tag "domain[contacts_attributes][#{k}][type]", options_for_select(['admin', 'tech'], v['type']), {class: 'form-control'}
 
         .form-group
-          = label_tag "domain_contacts_attributes_#{k}_code", t('contact_code'), class: 'col-md-2 control-label'
+          = label_tag "domain_contacts_attributes_#{k}_code", t(:id), class: 'col-md-2 control-label'
           .col-md-10.has-feedback
-            = text_field_tag("domain[contacts_attributes][#{k}][code]", v['code'], class: 'form-control', placeholder: t('contact_code'), autocomplete: 'off')
+            = text_field_tag("domain[contacts_attributes][#{k}][code]", v['code'], class: 'form-control', placeholder: t(:id), autocomplete: 'off')
 :coffee
   $("#domain-contacts").nestedAttributes
     bindAddTo: $(".add-domain-contact")

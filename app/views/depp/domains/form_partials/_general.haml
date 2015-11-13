@@ -16,4 +16,4 @@
   .form-group
     = label_tag :domain_registrant, t('registrant'), class: 'col-md-2 control-label'
     .col-md-10
-      = text_field_tag('domain[registrant]', @domain_params[:registrant], class: 'form-control', placeholder: t('contact_code'), autocomplete: 'off')
+      = text_field_tag('domain[registrant]', @domain_params[:registrant], class: 'form-control', placeholder: t(:id), autocomplete: 'off')

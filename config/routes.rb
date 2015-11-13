@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # mount Depp::Engine, at: '/'
   scope module: 'depp' do
     resources :domains do
       collection do
