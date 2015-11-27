@@ -17,7 +17,7 @@ $(document).on 'ready page:load', ->
     form.trigger 'restoreDefault'
 
     switch e.target.value
-      # when 'bic'
+      # when 'org'
       # when 'priv'
       when 'birthday'
         form.find('.js-ident-tip').show()
