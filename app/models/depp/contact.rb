@@ -9,9 +9,9 @@ module Depp
 
     DISABLED = 'Disabled'
     DISCLOSURE_TYPES = [DISABLED, '1', '0']
-    TYPES = %w( bic priv birthday )
+    TYPES = %w( org priv birthday )
     SELECTION_TYPES = [
-      ['Business code', 'bic'],
+      ['Business code', 'org'],
       ['Personal identification code', 'priv'],
       ['Birthday', 'birthday']
     ]
@@ -272,8 +272,8 @@ module Depp
       Country.new(country_code)
     end
 
-    def bic?
-      ident_type == 'bic'
+    def org?
+      ident_type == 'org'
     end
 
     def priv?
