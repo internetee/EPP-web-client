@@ -93,6 +93,7 @@ task deploy: :environment do
     invoke :load_commit_hash
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
+    invoke :'rails:assets_precompile'
     to :launch do
       queue "mkdir -p #{deploy_to}/current/tmp; touch #{deploy_to}/current/tmp/restart.txt"
     end
