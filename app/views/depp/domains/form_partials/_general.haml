@@ -5,6 +5,12 @@
       - readonly = params[:domain_name] ? true : false
       = text_field_tag('domain[name]', @domain_params[:name], class: 'form-control', readonly: readonly)
 
+  - if params[:domain_name]
+    .form-group
+      = label_tag :verified, t('verified'), class: 'col-md-2 control-label'
+      .col-md-10
+        = check_box_tag 'domain[verified]', '1', @domain_params[:verified].eql?('1'), onclick: "return (confirm('#{t(:verified_confirm)}') ? true : false);"
+
   - unless params[:domain_name]
     .form-group
       = label_tag :domain_period, t('period'), class: 'col-md-2 control-label'
