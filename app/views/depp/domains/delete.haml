@@ -7,6 +7,12 @@
     .panel-body
       .form-group
         .col-md-4.control-label
+          = label_tag 'domain[verified]', t('verified')
+        .col-md-6
+          = check_box_tag 'domain[verified]', '1', params[:verified].eql?('1'), onclick: "return (confirm('#{t(:verified_confirm)}') ? true : false);"
+
+      .form-group
+        .col-md-4.control-label
           = label_tag 'domain[legal_document]', t('legal_document')
         .col-md-6
           = file_field_tag 'domain[legal_document]'

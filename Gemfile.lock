@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/internetee/epp-xml.git
+  revision: 287fe8705ca2f344ea670b922dd9f08635efc7af
+  ref: 287fe8705ca2f344ea670b922dd9f08635efc7af
+  specs:
+    epp-xml (1.0.4)
+      activesupport (~> 4.1)
+      builder (~> 3.2)
+
+GIT
   remote: git://github.com/internetee/epp.git
   revision: 505c3f2739eb1da918e54111aecfb138a822739d
   specs:
@@ -77,9 +86,6 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    epp-xml (1.0.4)
-      activesupport (~> 4.1)
-      builder (~> 3.2)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
     execjs (2.6.0)
@@ -264,7 +270,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.1)
   countries (~> 1.2.5)
   epp (~> 1.4.2)!
-  epp-xml (~> 1.0.4)
+  epp-xml (= 1.0.4)!
   figaro (~> 1.1.1)
   guard-livereload (= 2.5.2)
   guard-rubocop (~> 1.1.0)
@@ -288,4 +294,4 @@ DEPENDENCIES
   uuidtools (~> 2.1.4)
 
 BUNDLED WITH
-   1.10.6
+   1.12.2

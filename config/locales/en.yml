@@ -131,3 +131,6 @@ en:
   delete_domain: 'Delete domain'
   update_domain: 'Update domain'
   wrong_password: 'Wrong password or some other issue'
+  verified_confirm: 'Verified status is for cases when current registrant is the one applying for the update. Legal document signed by the registrant is required. Are you sure this update is properly verified with the registrant?'
+  verified: 'Verified'
+

@@ -21,7 +21,9 @@ gem 'turbolinks',   '~> 2.5.3'
 gem 'therubyracer', '~> 0.12.2', platforms: :ruby
 
 gem 'epp', '~> 1.4.2', github: 'internetee/epp'
-gem 'epp-xml', '~> 1.0.4' # EIS EPP XMLs
+gem 'epp-xml',   '1.0.4',
+  github: 'internetee/epp-xml',
+  ref: '287fe8705ca2f344ea670b922dd9f08635efc7af' # EIS EPP XMLs
 gem 'uuidtools', '~> 2.1.4' # For unique IDs (used by the epp gem)
 
 gem 'nokogiri', '~> 1.6.6.2' # For XML parsing
