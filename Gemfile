@@ -23,7 +23,7 @@ gem 'therubyracer', '~> 0.12.2', platforms: :ruby
 gem 'epp', '~> 1.4.2', github: 'internetee/epp'
 gem 'epp-xml',   '1.0.4',
   github: 'internetee/epp-xml',
-  ref: '287fe8705ca2f344ea670b922dd9f08635efc7af' # EIS EPP XMLs
+  ref: '009611d78a3bebab33c04f73968f4606863f4b93' # EIS EPP XMLs
 gem 'uuidtools', '~> 2.1.4' # For unique IDs (used by the epp gem)
 
 gem 'nokogiri', '~> 1.6.6.2' # For XML parsing
