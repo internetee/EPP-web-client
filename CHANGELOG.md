@@ -1,3 +1,8 @@
+17.05.2016
+
+* Removed dependency on epp-xml gem on rubygems and redirected to locally maintained version  https://github.com/internetee/epp-xml
+* Added option to set verifyed element for domain registrant change and domain delete
+
 20.07.2015
 
 * Example mina/deploy.rb renamed to mina/deploy-example.rb in order to not overwrite local deploy scripts
