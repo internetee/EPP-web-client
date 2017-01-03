@@ -1,16 +1,16 @@
 GIT
   remote: git://github.com/internetee/epp-xml.git
-  revision: 475f650951f2cf5015e00d48f408a2194ecc1662
+  revision: 5dd542e67ef26d58365f30e553254d6db809277d
   specs:
-    epp-xml (1.0.5)
+    epp-xml (1.1.0)
       activesupport (~> 4.1)
       builder (~> 3.2)
 
 GIT
   remote: git://github.com/internetee/epp.git
-  revision: 505c3f2739eb1da918e54111aecfb138a822739d
+  revision: 1a50f2144f15a2d975337e56fb1ccaba5d956e9d
   specs:
-    epp (1.4.2)
+    epp (1.5.0)
       hpricot
       libxml-ruby
 
@@ -139,7 +139,7 @@ GEM
       activesupport (>= 3.0.0)
     kgio (2.10.0)
     libv8 (3.16.14.13)
-    libxml-ruby (2.8.0)
+    libxml-ruby (2.9.0)
     listen (3.0.6)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
@@ -268,8 +268,8 @@ DEPENDENCIES
   coderay (~> 1.1.1)
   coffee-rails (~> 4.1.1)
   countries (~> 1.2.5)
-  epp (~> 1.4.2)!
-  epp-xml (= 1.0.5)!
+  epp (= 1.5.0)!
+  epp-xml (= 1.1.0)!
   figaro (~> 1.1.1)
   guard-livereload (= 2.5.2)
   guard-rubocop (~> 1.1.0)
@@ -293,4 +293,4 @@ DEPENDENCIES
   uuidtools (~> 2.1.4)
 
 BUNDLED WITH
-   1.12.2
+   1.13.1
