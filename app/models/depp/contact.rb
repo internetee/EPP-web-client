@@ -19,29 +19,6 @@ module Depp
     class << self
       attr_reader :epp_xml, :user
 
-      def new_from_params(params)
-        new(
-          id: params[:code],
-          code: params[:code],
-          email: params[:email],
-          phone: params[:phone],
-          ident: params[:ident],
-          ident_type: params[:ident_type],
-          ident_country_code: params[:ident_country_code],
-
-          # postalInfo
-          name: params[:name],
-          org_name: params[:org_name],
-
-          # address
-          street:       params[:street],
-          city:         params[:city],
-          zip:          params[:zip],
-          state:        params[:state],
-          country_code: params[:country_code]
-        )
-      end
-
       # rubocop:disable Metrics/AbcSize
       def find_by_id(id, password = nil)
         data = info_xml(id, password)
