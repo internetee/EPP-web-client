@@ -26,7 +26,7 @@ gem 'uuidtools', '~> 2.1.4' # For unique IDs (used by the epp gem)
 
 gem 'nokogiri', '~> 1.6.6.2' # For XML parsing
 
-gem 'countries', '~> 1.2.5'
+gem 'countries', '~> 1.2.5', :require => 'countries/global'
 
 gem 'coderay', '~> 1.1.1'   # xml console visualize
 
