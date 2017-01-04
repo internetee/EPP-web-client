@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     redirect_to main_app.login_url and return unless depp_current_user && session[:last_seen]
 
+    return if Rails.env.development?
+
     if (session[:last_seen].to_i + ENV['session_timeout'].to_i) < Time.now.to_i
       session_timeout
     else
