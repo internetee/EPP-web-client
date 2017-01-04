@@ -42,10 +42,6 @@ group :development do
   gem 'rubocop',               '~> 0.26.1'
   gem 'guard-rubocop',         '~> 1.1.0'
 
-  # better errors
-  gem 'better_errors', '~> 2.1.1'
-  gem 'binding_of_caller', '~> 0.7.2'
-
   # fast sass development
   gem 'guard-livereload', '2.5.2', require: false
   gem 'rack-livereload', '0.3.16'
@@ -55,7 +51,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pry',  '~> 0.10.1'
   gem 'sdoc', '~> 0.4.0'
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
