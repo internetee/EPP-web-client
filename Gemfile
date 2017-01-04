@@ -57,4 +57,5 @@ end
 group :development, :test do
   gem 'pry',  '~> 0.10.1'
   gem 'sdoc', '~> 0.4.0'
+  gem 'rspec-rails', '~> 3.5'
 end
