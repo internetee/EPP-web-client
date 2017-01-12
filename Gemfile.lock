@@ -1,18 +1,18 @@
 GIT
-  remote: git://github.com/internetee/epp.git
-  revision: 1a50f2144f15a2d975337e56fb1ccaba5d956e9d
-  specs:
-    epp (1.5.0)
-      hpricot
-      libxml-ruby
-
-GIT
   remote: https://github.com/internetee/epp-xml.git
   revision: 5dd542e67ef26d58365f30e553254d6db809277d
   specs:
     epp-xml (1.1.0)
       activesupport (~> 4.1)
       builder (~> 3.2)
+
+GIT
+  remote: https://github.com/internetee/epp.git
+  revision: 1a50f2144f15a2d975337e56fb1ccaba5d956e9d
+  specs:
+    epp (1.5.0)
+      hpricot
+      libxml-ruby
 
 GEM
   remote: https://rubygems.org/
@@ -268,7 +268,7 @@ DEPENDENCIES
   coderay (~> 1.1.1)
   coffee-rails (~> 4.1.1)
   countries (~> 1.2.5)
-  epp (= 1.5.0)!
+  epp!
   epp-xml!
   figaro (~> 1.1.1)
   guard-livereload (= 2.5.2)
