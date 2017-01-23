@@ -1,3 +1,6 @@
+23.01.2017
+* Contact address is now optional
+
 16.12.2016
 * EPP XML schema namespace "urn:ietf:params:xml:ns:epp-1.0" replaced with "https://epp.tld.ee/schema/epp-ee-1.0.xsd"
 * EPP XML schema contact-eis-1.0 replaced with contact-ee-1.1
