@@ -131,17 +131,22 @@ module Depp
         postalInfo: {
           name: { value: name },
           org:  { value: org_name },
-          addr: {
-            street: { value: street },
-            city:   { value: city },
-            sp:     { value: state },
-            pc:     { value: zip },
-            cc:     { value: country_code }
-          }
         },
         voice: { value: phone },
         email: { value: email }
       }
+
+      address_provided = city.present? && country_code.present?
+
+      if address_provided
+        hash[:postalInfo][:addr] = {
+          street: { value: street },
+          city:   { value: city },
+          sp:     { value: state },
+          pc:     { value: zip },
+          cc:     { value: country_code }
+        }
+      end
 
       hash[:id] = nil if code.blank?
       create_xml = Depp::Contact.epp_xml.create(hash, extension_xml)
@@ -169,30 +174,34 @@ module Depp
       self.state        = params[:state]
       self.country_code = params[:country_code]
 
-      update_xml = Depp::Contact.epp_xml.update(
-        {
-          id: { value: id },
-          chg: {
-            postalInfo: {
-              name: { value: name },
-              org:  { value: org_name },
-              addr: {
-                street: { value: street },
-                city:   { value: city },
-                sp:     { value: state },
-                pc:     { value: zip },
-                cc:     { value: country_code }
-              }
-            },
-            voice: { value: phone },
-            email: { value: email },
-            authInfo: {
-              pw: { value: password }
-            }
+      xml_data = {
+        id: { value: id },
+        chg: {
+          postalInfo: {
+            name: { value: name },
+            org:  { value: org_name },
+          },
+          voice: { value: phone },
+          email: { value: email },
+          authInfo: {
+            pw: { value: password }
           }
-        },
-        extension_xml
-      )
+        }
+      }
+
+      address_provided = city.present? && country_code.present?
+
+      if address_provided
+        xml_data[:chg][:postalInfo][:addr] = {
+          street: { value: street },
+          city:   { value: city },
+          sp:     { value: state },
+          pc:     { value: zip },
+          cc:     { value: country_code }
+        }
+      end
+
+      update_xml = Depp::Contact.epp_xml.update(xml_data, extension_xml)
       data = Depp::Contact.user.request(update_xml)
 
       handle_errors(data)
