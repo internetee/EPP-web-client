@@ -39,7 +39,7 @@ group :development do
   # dev tools
   gem 'spring'
   gem 'unicorn'
-  gem 'rubocop',               '~> 0.26.1'
+  gem 'rubocop'
   gem 'guard-rubocop',         '~> 1.1.0'
 
   # better errors
