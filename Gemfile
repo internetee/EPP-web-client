@@ -24,7 +24,7 @@ gem 'epp', '1.5.0', github: 'internetee/epp'
 gem 'epp-xml', '1.1.0', github: 'internetee/epp-xml'
 gem 'uuidtools', '~> 2.1.4' # For unique IDs (used by the epp gem)
 
-gem 'nokogiri', '~> 1.6.6.2' # For XML parsing
+gem 'nokogiri'
 
 gem 'countries', '~> 1.2.5'
 
