@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # core
-gem 'rails', '4.2.5.2'
+gem 'rails', '~> 4.2'
 
 # load env
 gem 'figaro', '~> 1.1.1'
