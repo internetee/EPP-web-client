@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # core
-gem 'rails', '4.2.5.2'
+gem 'rails', '~> 4.2'
 
 # load env
 gem 'figaro', '~> 1.1.1'
@@ -24,7 +24,7 @@ gem 'epp', '1.5.0', github: 'internetee/epp'
 gem 'epp-xml', '1.1.0', github: 'internetee/epp-xml'
 gem 'uuidtools', '~> 2.1.4' # For unique IDs (used by the epp gem)
 
-gem 'nokogiri', '~> 1.6.6.2' # For XML parsing
+gem 'nokogiri'
 
 gem 'countries', '~> 1.2.5'
 
@@ -39,7 +39,7 @@ group :development do
   # dev tools
   gem 'spring'
   gem 'unicorn'
-  gem 'rubocop',               '~> 0.26.1'
+  gem 'rubocop'
   gem 'guard-rubocop',         '~> 1.1.0'
 
   # better errors
